@@ -23,6 +23,38 @@ module.exports = appInfo => {
     // myAppName: 'egg',
   };
 
+  config.sequelize = {
+    baseDir: 'model',
+    dialect: 'mysql',
+    host: '127.0.0.1',
+    port: '3306',
+    user: 'root',
+    password: 'root',
+    database: 'todos',
+  };
+
+  config.cors = {
+    origin: '*',
+    allowMethods: 'GET,POST,DELETE'
+  }
+
+  config.security = {
+    csrf: {
+      useSession: false,
+      sessionName: 'csrfToken',
+      ignore: ctx => {
+        // 跨域请求忽略csrf验证
+        if (ctx.request.url.indexOf('/api') !== -1) {
+          return true
+        } else {
+          return false
+        }
+      }
+    },
+    // cors
+    domainWhiteList: ['http://localhost:3000']
+  }
+
   return {
     ...config,
     ...userConfig,

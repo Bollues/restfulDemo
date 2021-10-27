@@ -3,7 +3,11 @@
 /**
  * @param {Egg.Application} app - egg application
  */
+
 module.exports = app => {
   const { router, controller } = app;
-  router.get('/getTodos', controller.demo.getTodos);
+  router.get('/api/getTodos', controller.demo.getTodos);
+  router.post('/api/addTodo', controller.demo.addTodo);
+  router.post('/api/finishTodo', controller.demo.finishTodo);
+  router.delete('/api/delTodo', controller.demo.delTodo);
 };

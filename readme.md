@@ -16,6 +16,12 @@ npm run dev
 open http://127.0.0.1:7001/
 ```
 
+```bash
+npm install --save egg-sequelize mysql2
+```
+
+
+
 
 
 ### fe
@@ -24,6 +30,11 @@ open http://127.0.0.1:7001/
 npx create-react-app my-app
 cd my-app
 npm start
+```
+
+```bash
+yarn add axios
+yarn add http-proxy-middleware
 ```
 
 
