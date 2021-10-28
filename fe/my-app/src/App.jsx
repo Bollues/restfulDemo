@@ -2,14 +2,19 @@ import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 
+// set 'api1' for egg.js || set 'api2' for spring boot
+const useApi = 'api2'
+
 function App() {
   const input = useRef()
   const [localTodos, setLocalTodos] = useState(localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : [])  // null -> []
+  const [clickFreeze, setClickFreeze] = useState(false)
 
   // component did mount
   useEffect(()=>{
-    axios.get('/api/getTodos').then((res) => {
+    axios.get(`/${useApi}/getTodos`).then((res) => {
       const data = res.data
+      console.log(`data from ${useApi}`, data)
       setLocalTodos(data)
     }).catch((err) => {
       window.alert('获取后台数据失败')
@@ -29,12 +34,12 @@ function App() {
     // check in fontend, input can not be empty
     if (inputVal) {
       const todoObj = {
-        'id': generateId(),
-        'text': inputVal,
+        'id': generateId().toString(),
+        'text': inputVal.toString(),
         'finished': false
       }
       // post to backend
-      axios.post('/api/addTodo', todoObj).then((res) => {
+      axios.post(`/${useApi}/addTodo`, JSON.stringify(todoObj)).then((res) => {
 
         // request from backend
         if (res.status === 200) {
@@ -67,7 +72,7 @@ function App() {
     }
 
     // post to backend
-    axios.post('/api/finishTodo', todoObj).then((res) => {
+    axios.post(`/${useApi}/finishTodo`, todoObj).then((res) => {
 
       // request from backend
       if (res.status === 200) {
@@ -89,20 +94,32 @@ function App() {
   // right click
   const delTodo = (event, id) => {
     event.preventDefault()
-    const todoObj = { id }
+    if (clickFreeze) {
+      window.alert('click freezing')
+    } else {
+      // freeze click
+      setClickFreeze(true)
+      setTimeout(() => {
+        // thaw click
+        setClickFreeze(false)
+      }, 500);
 
-    axios.delete('/api/delTodo', { data: todoObj}).then((res) => {
+      const todoObj = { id }
 
-      // request from backend
-      if (res.status === 200) {
-        // update localStorage & page
-        setLocalTodos(localTodos.filter(item => item.id !== id))
-      } else {
-        throw new Error(res)
-      }
-    }).catch((err) => {
-      throw new Error(err)
-    })
+      axios.delete(`/${useApi}/delTodo`, { data: todoObj}).then((res) => {
+  
+        // request from backend
+        if (res.status === 200) {
+          // update localStorage & page
+          setLocalTodos(localTodos.filter(item => item.id !== id))
+        } else {
+          throw new Error(res)
+        }
+      }).catch((err) => {
+        throw new Error(err)
+      })
+    }
+    
     
   }
   

@@ -2,7 +2,7 @@ const {createProxyMiddleware} = require('http-proxy-middleware')
 
 module.exports = function(app) {
   app.use(
-    createProxyMiddleware('/api', {
+    createProxyMiddleware('/api1', {
       target: 'http://127.0.0.1:7001', 
       changeOrigin: true, //控制服务器接收到的请求头中host字段的值
       /*
@@ -12,12 +12,23 @@ module.exports = function(app) {
       */
       //去除请求前缀，保证交给后台服务器的是正常请求地址(必须配置)
       pathRewrite: {
-        '^/api/getTodos': '/api/getTodos',
-        '^/api/addTodo': '/api/addTodo',
-        '^/api/finishTodo': '/api/finishTodo',
-        '^/api/delTodo': '/api/delTodo',
+        '^/api1/getTodos': '/api/getTodos',
+        '^/api1/addTodo': '/api/addTodo',
+        '^/api1/finishTodo': '/api/finishTodo',
+        '^/api1/delTodo': '/api/delTodo',
       }
     })
-    
+  ),
+  app.use(
+    createProxyMiddleware('/api2', {
+      target: 'http://127.0.0.1:8080', 
+      changeOrigin: true,
+      pathRewrite: {
+        '^/api2/getTodos': '/api/getTodos',
+        '^/api2/addTodo': '/api/addTodo',
+        '^/api2/finishTodo': '/api/finishTodo',
+        '^/api2/delTodo': '/api/delTodo',
+      }
+    })
   )
 }
