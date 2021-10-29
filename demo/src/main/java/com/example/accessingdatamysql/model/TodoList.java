@@ -8,12 +8,12 @@ import javax.persistence.Id;
 @Entity // This tells Hibernate to make a table out of this class
 public class TodoList {
   @Id
-  @GeneratedValue(strategy=GenerationType.AUTO)
+//  @GeneratedValue(strategy=GenerationType.AUTO)
   private String id;
 
   private String text;
 
-  private Boolean finished;
+  private Integer finished;
 
   public String getId() {
     return id;
@@ -31,11 +31,11 @@ public class TodoList {
     this.text = text;
   }
 
-  public Boolean getFinished() {
+  public Integer getFinished() {
     return finished;
   }
 
-  public void setFinished(Boolean finished) {
+  public void setFinished(Integer finished) {
     this.finished = finished;
   }
 }

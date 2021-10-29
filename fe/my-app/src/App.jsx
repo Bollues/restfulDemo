@@ -39,7 +39,10 @@ function App() {
         'finished': false
       }
       // post to backend
-      axios.post(`/${useApi}/addTodo`, JSON.stringify(todoObj)).then((res) => {
+      axios.post(`/${useApi}/addTodo`, {
+        headers: {'Content-Type': 'application/json'},
+        data: JSON.stringify(todoObj)
+      }).then((res) => {
 
         // request from backend
         if (res.status === 200) {
@@ -72,7 +75,10 @@ function App() {
     }
 
     // post to backend
-    axios.post(`/${useApi}/finishTodo`, todoObj).then((res) => {
+    axios.post(`/${useApi}/finishTodo`, {
+      headers: {'Content-Type': 'application/json'},
+      data: JSON.stringify(todoObj)
+    }).then((res) => {
 
       // request from backend
       if (res.status === 200) {
@@ -106,7 +112,10 @@ function App() {
 
       const todoObj = { id }
 
-      axios.delete(`/${useApi}/delTodo`, { data: todoObj}).then((res) => {
+      axios.post(`/${useApi}/delTodo`, { 
+        headers: {'Content-Type': 'application/json'},
+        data: JSON.stringify(todoObj)
+      }).then((res) => {
   
         // request from backend
         if (res.status === 200) {
