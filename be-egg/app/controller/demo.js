@@ -14,15 +14,17 @@ class DemoController extends Controller {
 
   async addTodo() {
     // 获取 request 参数
+    
     const params = this.ctx.request.body
-    console.log('add params----', params)
+    const data = JSON.parse(params.data)
+    console.log('add data----', data)
 
     // 请求数据库
     const res = await this.ctx.model.Todo.create(
       {
-        'id': params.id,
-        'text': params.text,
-        'finished': params.finished,
+        'id': data.id,
+        'text': data.text,
+        'finished': data.finished,
       }
     )
 
@@ -40,12 +42,13 @@ class DemoController extends Controller {
 
   async finishTodo() {
     const params = this.ctx.request.body
-    console.log('finish params----', params)
+    const data = JSON.parse(params.data)
+    console.log('finish data----', data)
 
     const res = await this.ctx.model.Todo.update(
-      { 'finished': params.finished },
+      { 'finished': data.finished },
       {
-        where: { 'id': params.id }
+        where: { 'id': data.id }
       }
     )
     console.log('update result----', res)
@@ -60,11 +63,12 @@ class DemoController extends Controller {
 
   async delTodo() {
     const params = this.ctx.request.body
-    console.log('delete params----', params)
+    const data = JSON.parse(params.data)
+    console.log('delete data----', data)
 
     const res = await this.ctx.model.Todo.destroy(
       {
-        where: { 'id': params.id }
+        where: { 'id': data.id }
       }
     )
     console.log('delete result----', res)

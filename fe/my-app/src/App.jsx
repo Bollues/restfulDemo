@@ -3,7 +3,7 @@ import axios from 'axios';
 import './App.css';
 
 // set 'api1' for egg.js || set 'api2' for spring boot
-const useApi = 'api2'
+const useApi = 'api1'
 
 function App() {
   const input = useRef()

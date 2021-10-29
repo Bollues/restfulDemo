@@ -9,5 +9,5 @@ module.exports = app => {
   router.get('/api/getTodos', controller.demo.getTodos);
   router.post('/api/addTodo', controller.demo.addTodo);
   router.post('/api/finishTodo', controller.demo.finishTodo);
-  router.delete('/api/delTodo', controller.demo.delTodo);
+  router.post('/api/delTodo', controller.demo.delTodo);
 };
