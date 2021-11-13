@@ -3,6 +3,7 @@ const {createProxyMiddleware} = require('http-proxy-middleware')
 module.exports = function(app) {
   app.use(
     createProxyMiddleware('/api1', {
+      // target: 'http://101.34.61.87:7001',  // egg.js
       target: 'http://127.0.0.1:7001',  // egg.js
       changeOrigin: true,
       pathRewrite: {
@@ -15,7 +16,8 @@ module.exports = function(app) {
   ),
   app.use(
     createProxyMiddleware('/api2', {
-      target: 'http://127.0.0.1:8080',  // tomcat
+      // target: 'http://101.34.61.87:8080',  // tomcat
+      target: 'http://127.0.0.1:8080',
       changeOrigin: true,
       pathRewrite: {
         '^/api2/getTodos': '/api/getTodos',

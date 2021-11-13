@@ -2,12 +2,12 @@ react-cli + egg.js/spring + mysql
 
 > need requirements:
 >
-> - npm: '6.14.8'
->
-> - node: '14.15.1'
-> - maven: '3.8.1'
+> - npm: 6 or 6 +
+>- node: 14 or 14 +
+> - mysql: 5.7 or 5.7 +
+> - maven: 3.8.1
 > - jdk: 1.8
-> - tomcat: 7
+> - tomcat: 8
 
 
 
@@ -39,6 +39,7 @@ npm install egg-cors
 1. install dependency
 
    ```bash
+   npm install --global yarn
    yarn install
    ```
 

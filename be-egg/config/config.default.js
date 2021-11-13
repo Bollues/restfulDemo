@@ -27,6 +27,7 @@ module.exports = appInfo => {
     baseDir: 'model',
     dialect: 'mysql',
     host: '127.0.0.1',
+    // host: '101.34.61.87',
     port: '3306',
     user: 'root',
     password: 'root',
@@ -52,7 +53,7 @@ module.exports = appInfo => {
       }
     },
     // cors
-    domainWhiteList: ['http://localhost:3000']
+    domainWhiteList: ['*']
   }
 
   return {
