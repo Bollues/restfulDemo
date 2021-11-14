@@ -24,7 +24,7 @@ function App() {
         {
           id: generateId(),
           type: 'success',
-          message: '获取后台数据成功'
+          message: `获取后台数据成功, 共${data.length}条数据`
         }
       ])
     }).catch((err) => {
